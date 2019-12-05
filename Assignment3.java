@@ -24,7 +24,6 @@ class BST {
     BST(){
         root = null;
     }
-
     int delete(String key)
     {
          int countdel;
@@ -37,8 +36,6 @@ class BST {
     BSTnode deletestudent(BSTnode root, String key)
     {
          if (root == null) return root;
-
-
               if (key.compareTo(root.key)<0){
                    count++;
                    root.left = deletestudent(root.left, key);
@@ -64,11 +61,9 @@ class BST {
                    }
                         root.key = minValue(root.right);
                         root.right = deletestudent(root.right, root.key);
-
               }
-
          return root;
-    }
+      }
       String minValue(BSTnode root)
       {
            count--;
@@ -78,7 +73,6 @@ class BST {
                 count++;
                 minv = root.left.key;
                 root = root.left;
-
            }
            return minv;
       }
@@ -108,9 +102,7 @@ class BST {
      }
     Student get(String key){
           count=0;
-          //System.out.println("ROOT.key=");
           BSTnode node=getstudent(root,key);
-          //System.out.println("ROOT.key="+node);
           if(node==null){
                return null;
           }
@@ -119,22 +111,16 @@ class BST {
           }
     }
     BSTnode getstudent(BSTnode root,String key){
-         //System.out.println(".key="+root.key+"//"+key);
          if(root==null){
-
-                  //System.out.println("W");
               return null;
          }
          if(key.compareTo(root.key)==0){
-              //System.out.println("X");
               return root;
          }
          else if(key.compareTo(root.key)<0){
-              //System.out.println("Y");
               return getstudent(root.left,key);
          }
          else if(key.compareTo(root.key)>0){
-              //System.out.println("Z");
              return getstudent(root.right,key);
          }
          else{
@@ -144,31 +130,23 @@ class BST {
     boolean contains(String key){
          f=false;
          root=contains_student(root,key);
-         //System.out.println(f);
          return f;
     }
     BSTnode contains_student(BSTnode root,String key){
          count++;
-          //System.out.println(root);
-              //System.out.println("D1");
          if(root==null){
-              //System.out.println("##");
               f=false;
               return null;
          }
          else{
-             //System.out.println("ROOT==>"+root.key+" / "+key);
              if(key.compareTo(root.key)==0){
-               //   System.out.println("A1");
                   f=true;
                   return root;
              }
              else if(key.compareTo(root.key)<0){
-                 // System.out.println("B1");
                   root.left=contains_student(root.left,key);
              }
              else if(key.compareTo(root.key)>0){
-                 // System.out.println("C1");
                   root.right=contains_student(root.right,key);
              }
         }
@@ -291,7 +269,6 @@ class DoubleHashing<K,T> implements MyHashTable_<K,T>{
      }
      public int insert(K key, T obj){
           long index;
-          //Here unchecked and unsafe operation occurs
           Pair pair=(Pair)key;
           Student student=(Student)obj;
           String fname=(String)pair.fname();
@@ -299,9 +276,6 @@ class DoubleHashing<K,T> implements MyHashTable_<K,T>{
           int i=0;
           do{
                index=(HashFunction.djb2(fname+lname,size)+i*HashFunction.sdbm(fname+lname,size)) % size;
-
-
-               //System.out.println("INDEX OF ="+fname+" = "+index);
                i++;
                if(((arr[(int)index])!=null) && (arr[(int)index].fname().equals(""))){
                     break;
@@ -332,7 +306,6 @@ class DoubleHashing<K,T> implements MyHashTable_<K,T>{
                i=-1;
           }
           return i;
-
      }
      public int delete(K key){
           Pair pair=(Pair)key;
@@ -423,14 +396,12 @@ class DoubleHashing<K,T> implements MyHashTable_<K,T>{
           }
      }
      public void print(){
-          //System.out.println("LENGTH="+arr.length);
           for(int i=0; i<arr.length; i++){
                if(arr[i]!=null)
                System.out.println(i+"=="+arr[i].fname()+"/"+arr[i].lname()+"/"+arr[i].hostel()+"/"+arr[i].department()+"/"+arr[i].cgpa());
                else
                System.out.println("null");
           }
-          //System.out.println("-----------");
      }
 }
 class HashFunction{
@@ -462,17 +433,13 @@ class SeperateChianing<K,T> implements MyHashTable_<K,T>{
           String k=newarr[0]+newarr[1];
           Student student=(Student)obj;
           long index=HashFunction.djb2(k,size);
-          //System.out.println("INDEX ="+index);
           if(arr[(int)index]==null){
-          //     System.out.println("INDEX of= "+k+" = "+index);
                arr[(int)index]=new BST();
                count=arr[(int)index].insert(k,student);
           }
           else{
-          //     System.out.println("INDEX of= "+k+" = "+index);
                count=arr[(int)index].insert(k,student);
           }
-          // System.out.println("ROOT=="+arr[(int)index].root.s.fname());
           return count;
      }
      public int update(K key, T obj){
@@ -502,16 +469,12 @@ class SeperateChianing<K,T> implements MyHashTable_<K,T>{
           String newarr[]=((String)key).split(" ");
           String k=newarr[0]+newarr[1];
           long index=HashFunction.djb2(k,size);
-          //System.out.println("A");
           if(arr[(int)index]==null){
-               //System.out.println("B");
                f=false;
           }
           else{
-               //System.out.println("C");
                f=arr[(int)index].contains(k);
           }
-          //System.out.println("D"+false);
           return f;
      }
      public T get(K key)throws NotFoundException{
@@ -519,20 +482,15 @@ class SeperateChianing<K,T> implements MyHashTable_<K,T>{
           String k=newarr[0]+newarr[1];
           long index=HashFunction.djb2(k,size);
           Student stu=null;
-          //System.out.println("INDEX=="+index);
           if(arr[(int)index]==null){
-               //System.out.println("A");
                throw new NotFoundException();
           }
           else{
-               /*System.out.println("B");
+               /*
                if(arr[(int)index].get(k)==null){
-                    System.out.println("C");
-
                     throw new NotFoundException();
                }
                else{
-                    System.out.println("D");
                     stu=arr[(int)index].get(k);
                }*/
                if(contains(key)){
@@ -592,54 +550,42 @@ public class Assignment3{
                     if(arr[0].equals("insert")){
                          Student s=new Student(arr[1],arr[2],arr[3],arr[4],arr[5]);
                          Pair p=new Pair<String,String>(arr[1],arr[2]);
-                         // System.out.println("INSERT1");
                          if(d.contains(p)){
                               System.out.println("E");
                          }
                          else{
                               System.out.println(d.insert(p,s));
                          }
-
-
-                         // System.out.println("INSERT2");
                     }
                     else if(arr[0].equals("update")){
                          Student s=new Student(arr[1],arr[2],arr[3],arr[4],arr[5]);
                          Pair p=new Pair<String,String>(arr[1],arr[2]);
-                         // System.out.println("UPDATE1");
                          if(d.update(p,s)==-1){
                               System.out.println("E");
                          }
                          else{
                               System.out.println(d.update(p,s));
                          }
-
-                         // System.out.println("UPDATE2");
                     }
                     else if(arr[0].equals("delete")){
                          Pair p=new Pair<String,String>(arr[1],arr[2]);
-                         // System.out.println("DELETE1");
                          if(d.contains(p)==false){
                               System.out.println("E");
                          }
                          else{
                          System.out.println(d.delete(p));}
-                         // System.out.println("DELETE2");
                     }
                     else if(arr[0].equals("contains")){
                          Pair p=new Pair<String,String>(arr[1],arr[2]);
-                         // System.out.println("CONTAINS1");
                          if(d.contains(p)){
                               System.out.println("T");
                          }
                          else{
                               System.out.println("F");
                          }
-                         // System.out.println("CONTAINS2");
                     }
                     else if(arr[0].equals("get")){
                          Pair p=new Pair<String, String>(arr[1],arr[2]);
-                         // System.out.println("GET1");
                          try{
                               Student s=(Student)d.get(p);
                               s.printdetail();
@@ -647,18 +593,15 @@ public class Assignment3{
                          catch(NotFoundException e){
                               System.out.println(e);
                          }
-                         // System.out.println("GET2");
                     }
                     else if(arr[0].equals("address")){
                          Pair p=new Pair<String,String>(arr[1],arr[2]);
-                         //System.out.println("ADDRESS1");
                          try{
                               System.out.println(d.address(p));
                          }
                          catch(NotFoundException e){
                               System.out.println(e);
                          }
-                         //System.out.println("ADDRESS2");
                     }
 
                }
@@ -669,50 +612,40 @@ public class Assignment3{
                BST b=new BST();
                int o=0;
                while((line=br.readLine())!=null){
-                    //System.out.println("---------------------");
                     String arr[]=line.split(" ");
                     if(arr[0].equals("insert")){
                          Student s1=new Student(arr[1],arr[2],arr[3],arr[4],arr[5]);
                          String k=arr[1]+" "+arr[2];
-                         //System.out.println("INSERTING##"+(++o));
                          System.out.println(s.insert(k,s1));
-                         //System.out.println("INSERTING--");
                     }
                     else if(arr[0].equals("update")){
                          Student s1=new Student(arr[1],arr[2],arr[3],arr[4],arr[5]);
                          String k=arr[1]+" "+arr[2];
-                         //System.out.println("UPDATING##"+(++o));
                          if(s.contains(k)){
                               System.out.println(s.update(k,s1));;
                          }
                          else{
                               System.out.println("E");
                          }
-                         //System.out.println("UPDATING--");
                     }
                     else if(arr[0].equals("delete")){
                          String k=arr[1]+" "+arr[2];
-                    //     System.out.println("DELETE##"+(++o));
                          if(s.contains(k)){
                               System.out.println(s.delete(k));
                          }
                          else{
                               System.out.println("E");
                          }
-                         //System.out.println("DELETE--");
                     }
                     else if(arr[0].equals("contains")){
                          String k=arr[1]+" "+arr[2];
-                         //System.out.println("CONTAINS##"+(++o));
                          if(s.contains(k))
                               System.out.println("T");
                          else
                               System.out.println("F");
-                         //System.out.println("CONATINS--");
                     }
                     else if(arr[0].equals("get")){
                          String k=arr[1]+" "+arr[2];
-                         //System.out.println("GET##"+(++o));
                          try{
                               Student s1=(Student)s.get(k);
                               s1.printdetail();
@@ -720,11 +653,9 @@ public class Assignment3{
                          catch(NotFoundException e){
                               System.out.println(e);
                          }
-                         //System.out.println("GET--");
                     }
                     else if(arr[0].equals("address")){
                          String k=arr[1]+" "+arr[2];
-                         //System.out.println("ADDRESS##"+(++o));
                          try{
                               String add=s.address(k);
                               System.out.println(add);
