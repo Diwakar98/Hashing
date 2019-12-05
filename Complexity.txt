@@ -1,0 +1,114 @@
+I have made the following classes:
+     Assignment3, SeperateChianing, DoubleHashing, HashFunction, Student, Pair, BST, BSTnode, NotFoundException
+#Assignment3:
+     It takes command line argument which contains size of array(i.e HashTable), the type of data structure which we have to implement and the path of the input file. I have used the split() function to split the string into array of strings.
+     It contains:
+     main(String args):
+          If the data structure if DH the it implements Double Hasing.
+          If the data structure if SCBST the it implements Seperate Chaining.
+          While inserting I am checking whether the key is already present or not using the contains function.
+               If it is already present then I am print "E" which denoted an error or else inserting the student.
+          While deleting I am checking whether the key is already deleted or not using the contains function.
+               If it is already deleted then I am print "E" which denoted an error or else deleting the student.
+          While updating I am checking whether the key is already present or not using the contains function.
+               If it is present then I am updating the object or else printing "E".
+
+#DoubleHashing:
+     It implements MyHashTable_ interface to implement Double Hashing data structure.
+     It contains the following functions:
+     ->DoubleHashing(int size): It is a parameterized constructor to make the array of Student and initialize its size.
+     ->insert(K key, T obj): It takes key and obj as parameter, calulate the hash value using the function H1 and H2, until its finds an empty place(i.e. the index at which the array is null or the index at which the element has been deleted).It return the count of the number of time it calculated the hash value.
+     ->delete(K key, T obj): It takes key and obj as parameter, calculate the hash value using the function H1 and H2, When the hash value is calculated, to delete the object, I am creating an student object whose data(i.e. first name, last name, hostel, department and cgpa) is an empty string. This object denots an student that has been deleted from a place. Now to delete the object I am searching in the hashtable till I get that object and after getting it, i replace the original object with the new empty object created.
+     ->update(K key, T obj): It takes key and obj as parameter, calculatethe hash value using the function H1 and H2. It repeated calculate hash
+     value till it gets the object, and creates a new student object with the new data and replaces it.
+     ->contains(K key): It calculates the hash values till it get an hashvalue at which the hashtable(i.e. array) is null. If it find before raching the nul, it returns true, or else it returns false.
+     ->get(K key): It return an object of the given key, and if nor such student is found then it throws a NotFoundException.It searches till it reaches and index where the array contains null.If it find the match before reaching the null then it return element of the array(i.e) the student object or else generates and Exception.
+     ->address(K key): It return the index of the key where the object was finally inserted. It searches in the hashtable till it gets an index of null position. If if find the match then it returns the index of that position or else it throws a NotFoundException.
+     ->print():It print the entire hash table(along with the data whereever present and null where not element exists). It was used in debugging.
+#SeperateChianing:
+     It implements MyHashTable_ interface to implement Seperate Chaining data structure.
+     Global Variable: arr(array of BST)
+     It contains the following functions.
+     ->SeperateChianing(int size): It is a parameterized constructor to make the array of Student and initialize its size.
+     ->insert(K key, T obj): To insert it calculates the Hash Value using the H1 hash function. If at this index there is no BinarySearchTree present the it creates and object of BST class and make obj as the root of this BST. If already a BST exists then it insert of BST an recursively find its position and inserts it. It return the number of the nodes touched.
+     ->delete(K key): It calculates the hash value of the key using H1. It deletes searches then node and deletes it. replacing it with its successor and make its successor null simultaneously.
+     ->contains(K key)It calculates hash value of the key using H1. If arr at this index is null(i.e. no BST at this index) then it return false,
+      or else it compares the first name to the key, It it is greater then zero then recursively searches in the right subtree, if it is less than zero then it recursively searches in left subtree and if it it zero(i.e match found) it return true;
+     ->get(K key): It calculates the index. If no BST exists at that index it throws NotFoundException else if searches in that BST and if data is found in that tree then it return the Student object or else it throws NotFoundException.
+     ->address(K key):It searches and gets the address of the data. if not such data exists then it throws NotFoundException.
+     ->print():It print the entire hash table along with the BST in inorder sequence. It is used in debugging.
+#BST:
+     This class implement the Binary Search Algorithm on tree, along with searching, updating, deleting,etc.
+     It contains the few following functions:
+     ->deletestudent(BSTnode root, String key): It deletes the student with corresponding key.
+     ->minValue(BSTnode root): It find the successor of the root node.
+     ->getaddress(BSTnode root, String key): It calculates the address recursively.
+     ->getstudent:It find the object of the student with the given key.
+     ->contains_student(String key): It chechs if the student with the givent key exists of not.
+     ->updatestudent(String key, Student s): It updates the student  with the new data.
+     ->insertstudent(String k,Student s):It insert the student with the given data.
+     ->inorder:It print the Binary Tree in inorder sequence. It was used in debugging.
+#BSTnode:
+     This is used to create a node of which binary tree is formed.
+     If contains Student s and String key variable.
+     It contains:
+     ->BSTnode(String key,String s): To initialize the nodes.
+#Pair:
+     This class combines two data make make it a single entity.It is used to make a pair of the firstname and last name.The pair acts as a key while calculating the HAsh Value.
+     It contains:
+     ->Pair(A fname,B lname):constructor to initialize the object.
+     ->fname(): to return firstname.
+     ->lname():to return lastname.
+#NotFoundException:
+     This is a custom Exception.
+     It contains:
+     toString(): To print the error.
+#Student:
+     This class is used to create an object of student.
+#HashFunction:
+     This class is used to calculate the hash values
+     It contains:
+     dbj2(String key,int size): It is the H2 function.
+     sdbm(String key,int size): It is the H2 function.
+
+
+TIME COMPLEXITY:
+     Double Hashing:
+          WorstCase:
+               insert:O(n)
+               delete:O(n)
+               contains:O(n)
+               update:O(n)
+               get:O(n)
+          AverageCase:
+               insert:O(1)
+               delete:O(1)
+               contains:O(1)
+               update:O(1)
+               get:O(1)
+          BestCase:
+               insert:O(1)
+               delete:O(1)
+               contains:O(1)
+               update:O(1)
+               get:O(1)
+     Seperate Chaining with BST:
+          Assuming Balanced Tree:
+               WorstCase:
+                    insert:O(n)
+                    delete:O(n)
+                    contains:O(n)
+                    update:O(n)
+                    get:O(n)
+               AverageCase:
+                    insert:O(log n)
+                    delete:O(log n)
+                    contains:O(log n)
+                    update:O(log n)
+                    get:O(log n)
+               BestCase:
+                    insert:O(1)
+                    delete:O(1)
+                    contains:O(1)
+                    update:O(1)
+                    get:O(1)
